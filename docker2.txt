@@ -101,7 +101,8 @@ docker-compose up -d
 docker-compose ps
 docker-compose exec servicio bash
 docker-compose down
-
+Para cuando el contenedor no quiera parar: 
+sudo aa-remove-unknown
 
 
 

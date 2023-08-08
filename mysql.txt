@@ -1,2 +1,15 @@
-sudo mysql > Iniciar mysql shell
+mysql -u root -p > Iniciar mysql shell
 exit > Salir de la shell
+
+How to create a user from the command line
+First of all, we need to create a user. For this, we run the following command:
+
+CREATE USER 'username' IDENTIFIED BY 'password';
+Don’t forget to replace the username and password placeholders with a username and password of your choice.
+
+Keep in mind, that just creating a user is not enough, you need to grant certain privileges to this user. For this, run the MySQL query:
+
+GRANT SELECT ON *.* TO 'username';
+This explicitly grants only the SELECT permission for the specified user. In case you want to grant a user all permissions on all databases, run the following command:
+
+GRANT ALL PRIVILEGES ON *.* TO 'username';.
