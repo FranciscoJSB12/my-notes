@@ -1,0 +1,201 @@
+-Qué son entidades y atributos:
+    1. Entidades(objetos del mundo real que se puedan identificar en un grupo), se dibujan con rectángulos.
+    2. Atributos se dibujan con ovalos.
+    3. Atributos multivaluados se dibujan con doble ovalo (Una computadora puede tener más de un disco duro).
+    4. Atributos que están compuestos por otros se les llama compuestos.
+    5. La antiguedad se dibuja con líneas punteadas.
+    6. Las entidades por convención se escriben en plural.
+    7. Los atributos llaves vienen inherente al objeto o una clave artificial.
+    8. Hay entidades fuertes(no dependen de otra para existir) y débiles(lo contrario, hace falta una fuerte para existir una débil).
+    9. Entidades débiles se representan con el rectangulo pero doble. Ejemplo: Libro > Ejemplares.
+    10. Las entidades débiles pueden ser así identidad(no se diferencian entre sí más que por la clave de su entidad fuerte) o por existencia(se les asigna una clave propia).
+    11. Comúnmente los atributos multivaluados se convierten en entidades separadas.
+
+-Relaciones: 
+    1. Diagrama entidad-relación.
+    2. Las relaciones se representan con un rombo y verbos(ejemplo: tiene, pertenece, etc).
+    3. Cardinalidad: 
+        a) 1 a 1 persona > tiene > datos de contacto.
+        b) Tomamos el número mayor de ambos lados para sacar la cardinalidad entre las entidades.
+        c) 0 a 1 también 1 a 1 opcional sesion_actual > tiene > usuario.
+        d) 1 a N también 1 a muchos persona > tiene > N carros.
+        e) 0 a N paciente > tiene > hab_hospital también 1 a N opcional.
+        f) N a N alumno > pertenece > clase.
+
+-Tipos de datos y constraints:
+    Texto: CHAR(n) ESTÁTICO 8 Y SOLO SERÁ 8, VARCHAR(n) 255, TEXT 500 O MÁS.
+    Números: INTEGER, BIGINT, SMALLINT, DECIMAL(n,s)n:número s:décimales, NUMERIC(n,s).
+    Fecha/hora: DATE(fecha), TIME(hora), DATETIME(dia y hora), TIMESTAMP.
+    Lógicos: BOOLEAN.
+
+    NOT NULL: no puede quedar en blanco.
+    UNIQUE: solo existe uno con ese valor en esa tabla.
+    PRIMARY KEY: ES NOT NULL Y UNIQUE PARA UNIR TABLAS Y/O ENTIDADES.
+    FOREIGN KEY: PARA JUNTAR TABLAS, RELACIONARLAS, LA PRIMARY KEY DE UNA TABLA SE AÑADE COMO FOREIGN KEY EN LA OTRA.
+    CHECK: PARA DEFINIR UNA REGLA SEGÚN DESEAMOS.
+    DEFAULT: DEFINIR UN VALOR PREDETERMINADO.
+    INDEX: SE CREA POR COLUMNAS PARA BUSQUEDAS MÁS RÁPIDAS. Si se añade datos nuevos constantemente no es muy recomendable.
+
+    NORMALIZACIÓN: 
+        a) Primera formal normal: Atributos atómicos (Sin campos repetidos).
+        No puedes tener dos columnas así materia_1 mateteria_2, lo mejor es dejar una sola columna llamada materia.
+        b) Seguna formal normal: Cumple 1FN(primera formal normal) y cada campo de la tabla debe depender de una clave única.
+        alumno_id 
+        1
+        1
+        2
+        2
+        Eso no puede ocurrir
+        Lo correcto:
+        materia_id  alumno_id   materia
+        1           1           MySql
+        2           1           Python
+        3           2           MySql
+        4           2           Python
+        c) Tercera formal normal: Cumple 1FN y 2FN y los campos que no son clave no deben tener dependencias.
+        d)Cuarta formal normal: Cumple 1FN, 2FN y 3FN los campos multivaluados se identifican por una clave única.
+        NOTA: EN LA TABLA DONDE TIENES LA TERMINACIÓN MUCHOS, SE COLOCA LA LLAVE FORANEA DE LA QUE TIENE UNO. PARA Las
+        RELACIONES MUCHOS A MUCHOS SE PONE UNA TABLA INTERMEDIA, TABLA PIVOTE (PK, FK). CLAVE COMPUESTA ID POSTS ETIQUETAS.
+    
+-MANEJADOR DE BASES DE DATOS:
+    RDMBS: RELATIONAL DATABASE MANAGEMENT SYSTEM.
+    
+-DDL (DATA DEFINITION LANGUAGE):
+
+    CREATE, ALTER, DROP.
+    CREATE: DATABASE O SCHEMA, TABLE, VIEW(PROYECCIÓN DE LOS DATOS).
+    
+    Create Database:
+    CREATE DATABASE test_sb;
+    USE test_db;
+
+    Create table:
+    CREATE TABLE person (
+        person_id int,
+        last_name varchar(255),
+        first_name  varchar(255),
+        address varchar(255),
+        city varchar(255)
+    );
+
+    Create View 
+    CREATE VIEW v_brasil_customers AS
+    SELECT customer_name,
+    contact_name
+    FROM customers
+    WHERE country = 'Brasil';
+
+    Alter Table
+    ALTER TABLE people
+    ADD date_of_birth date;
+
+    ALTER TABLE people
+    ALTER COLUMN date_of_birth year;
+
+    ALTER TABLE people
+    DROP COLUMN date_of_birth;
+
+    Drop
+    DROP TABLE people;
+    DROP DATABASE test_db;
+
+-DML(DATA MANIPULATION LANGUAGE):
+    INSERT, UPDATE, DELETE, SELECT.
+
+    INSERT
+    INSERT INTO person (last_name, first_name, address, city)
+    VALUES ('Hernández', 'Laura', 'Calle 21', 'Monterrey');
+
+    UPDATE 
+    UPDATE person
+    SET last_name = 'Chávez', city = 'Mérida'
+    WHERE person_id = 1;
+
+    UPDATE person
+    SET first_name = 'Juan'
+    WHERE city = 'Mérida';
+
+    UPDATE person
+    SET first_name = 'Juan';
+
+    DELETE 
+    DELETE FROM person
+    WHERE person_id = 1;
+
+    DELETE FROM people;
+
+    SELECT 
+    SELECT first_name, last_name
+    FROM person;
+
+-Estructura básica de un Query:
+    SELECT city, count(*) AS TOTAL
+    FROM person
+    WHERE active = true
+    GROUP BY city
+    ORDER BY total dependencias
+    HAVING total >= 2;
+
+    Ejemplos:
+    
+    SELECT *
+    FROM posts
+    WHERE fecha_publicacion > '2024';
+
+    SELECT titulo AS title, fecha_publicacion AS date
+    FROM posts;
+
+    SELECT COUNT(*) AS numero_posts
+    FROM posts;
+
+    JOIN 
+    DIFERENCIA 
+    LEFT JOIN: TRAE TODOS LOS DATOS DE LA TABLA A ESTÉN
+    O NO EN LA TABLA B.
+    SI TENGO USUARIO TENGA O NO TENGA POSTS LOS UNO COMPLETOS, TENGA O NO TENGAN POSTS ASOCIADOS.
+    TAMBIÉN PODEMOS TRAER LOS USUARIOS QUE NO TIENEN POSTS ASOCIADOS.
+    RIGHT JOIN: TRAE TODO LO QUE ESTÁ EN LA TABLA B SIN IMPORTAR O NO SI ESTÁ EN LA TABLA A. TRAE TODOS LOS POSTS AUNQUE NO TENGA NINGUN USUARIO QUE LOS HAYA CREADO.
+    TAMBIEN SE PUEDE TRAER SOLO LOS QUE NO TIENEN USUARIOS ASOCIADOS.
+
+    SELECT * FROM usuarios
+    LEFT JOIN posts ON usuarios.id = posts.usarios_id;
+    TOMA LA TABLA QUE YA TIENE(USUARIOS) Y SE UNE CON LA TABLA POSTS
+
+    SELECT * FROM usuarios
+    LEFT JOIN posts ON usuarios.id = posts.usarios_id
+    WHERE posts.usuario_id IS NULL;
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

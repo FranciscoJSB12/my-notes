@@ -1,0 +1,20 @@
+npm run start > correr en producción
+npm run dev > correr en desarrollo
+
+Ejemplo:
+1. Crear un index.js, una carpeta routes, otro index.js dentro de
+esa carpta y ahí se ubican las rutas con sus nombres (products.router.js).
+
+2. En el products.router.js importamos express para usar express.Router().
+
+3. Ese router se asocia con los verbos get, post, put, patch, delete.
+
+4. Es necesario exportar el router.
+
+5. Nos vamos al index dentro de la carpeta routes, nuevamente es necesario importar express para el Router(), luego creamos una función que recibe app de express, un middleware tipo app.use(ruta, router), después de eso usamos el router.use(ruta, archivoderuta), finalmente importamos el routerApi
+
+6. En el index principal, importamos el routerApi declarado anteriormente y pasamos app de express.
+
+
+
+

@@ -1,0 +1,84 @@
+COMANDOS DE GIT
+    git --version
+
+    git config --global user.name "Francisco Salazar"
+
+    git config --global user.email javif8@gmail.com
+
+    git config --global core.editor "code --wait"
+    
+    git config --global -e
+
+    git config --global core.autocrlf input(true para windows)
+    
+    git config --global init.defaultBranch main
+	
+    git config -h
+    
+    git config -l
+
+    git init
+
+    git status
+
+    git add ./file.txt/*.txt
+
+    git commit -m ""
+    
+    git commit --amend > Arreglar ultimo commit
+    
+    git reset --soft HEAD~1 > Deshacer último commit, --soft mantiene los cambios en el archivo --hard es para 
+    cuando no se quiere mantener los cambios de ese commit. HEAD último commit realizado en la rama actual.~1 retroceder
+    un commit en el historial.
+
+    git rm file.txt > Eliminar archivo
+
+    git rm --cached file.txt > Saca el archivo de staging
+
+    git restore file.txt > Recupera archivo borrado, pero sin haber hecho commit.
+
+    git mv file.txt file1.txt > Renombrar archivo.
+
+    git status -s
+
+    git diff
+    
+    git diff --staged
+    
+    git log
+    
+    git log --oneline
+    
+    git branch > Chequear rama
+    
+    git branch newBranch > Crear rama
+    
+    git checkout main > Cambiar a la rama main
+    
+    git checkout -b newBranch > Crear rama y cambiar hacia ella
+    
+    git branch -m version-python version-py > Cambiar nombre de la rama
+    
+    Para unir las ramas, nos ubicamos en la rama main, luego escribimos > git merge newBranch
+    
+    cat file > Mostrar contenido del archivo
+
+    .gitignore
+    .env
+    node_modules/
+
+    git remote add origin url
+    
+    git push -u origin main (Con -u creamos la rama, la rama main no existe en github, por eso el -u)
+    
+    NOTA: RECUERDA CONFIGURAR UNA LLAVE SSH PARA TU EQUIPO.
+    ssh-keygen -t rsa -b 4096 -C "javif8@gmail.com"
+    eval $(ssh-agent -s) > Chequear servidor de llaves SSH
+    ssh-add ~/.ssh/id_rsa >Agregar llave a nuestro sistema
+    
+    
+
+
+
+
+

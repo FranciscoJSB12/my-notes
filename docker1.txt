@@ -1,0 +1,103 @@
+Correr base de datos dentro de contenedor
+
+-Levantar contenedor:
+    docker-compose up -d postgres
+
+-Listar: 
+    docker-compose ps
+
+-Finalizar ejecución:
+    docker-compose down
+
+-Conectar a base de datos: 
+    docker-compose exec postgres bash
+
+-Listar archivos del contenedor: 
+    ls -l
+
+-Ejecutar comandos en postgres:
+    psql -h localhost -d my_store -U fran
+
+-Mostrar estructura de base de datos:
+    \d+
+
+-Salir de la base de datos:
+    \q
+
+-Salir del contenedor:
+    exit
+ 
+-Levantar contenedor de pgadmin
+ docker-compose up -d pgadmin
+ 
+-Crear archivo docker-compose.yml y luego escribir la siguiente configuración:
+
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment: 
+      - POSTGRES_DB=my_store
+      - POSTGRES_USER=fran
+      - POSTGRES_PASSWORD=admin123
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
+
+-docker images > listar imágenes descargadas
+
+-docker pull node > descargar imagen más reciente de node
+
+-docker pull node:18 > decargar node version 18
+
+-docker image rm node > eliminar la imagen descargada de node
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

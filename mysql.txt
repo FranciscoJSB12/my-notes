@@ -1,0 +1,2 @@
+sudo mysql > Iniciar mysql shell
+exit > Salir de la shell
