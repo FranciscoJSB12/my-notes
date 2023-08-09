@@ -3,7 +3,7 @@ COMANDOS DE GIT
 
     git config --global user.name "Francisco Salazar"
 
-    git config --global user.email javif8@gmail.com
+    git config --global user.email email
 
     git config --global core.editor "code --wait"
     
