@@ -72,7 +72,7 @@ COMANDOS DE GIT
     git push -u origin main (Con -u creamos la rama, la rama main no existe en github, por eso el -u)
     
     NOTA: RECUERDA CONFIGURAR UNA LLAVE SSH PARA TU EQUIPO.
-    ssh-keygen -t rsa -b 4096 -C "javif8@gmail.com"
+    ssh-keygen -t rsa -b 4096 -C "email"
     eval $(ssh-agent -s) > Chequear servidor de llaves SSH
     ssh-add ~/.ssh/id_rsa >Agregar llave a nuestro sistema
     
